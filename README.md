@@ -37,9 +37,9 @@ Estimate of time needed to complete: 1:30
 
 Start time: 2:30
 
-Finish time: 
+Finish time: 7:02
 
-Actual time needed to complete: 
+Actual time needed to complete: 5 hours
 _____________________________________
 Name of feature: Errors (revisited):
 
