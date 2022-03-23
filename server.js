@@ -28,7 +28,7 @@ app.get('/weather', (req, res) => {
     let cityForecast = new Forecast(cityObj);
     res.send(cityForecast); // weather data from weatherAPI
   } catch (error) {
-    console.error(`Your requested city is not in the database. ${error}`);
+    response.status(500).send(error.message);
   }
 });
 

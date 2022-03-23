@@ -41,12 +41,12 @@ Finish time: 7:02
 
 Actual time needed to complete: 5 hours
 _____________________________________
-Name of feature: Errors (revisited):
+Name of feature: Errors (revisited):Error handling, Display message to user on ERR
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete:  15
 
-Start time: 
+Start time: 7:07
 
-Finish time: 
+Finish time: 7:16
 
-Actual time needed to complete: 
+Actual time needed to complete:  8 minutes
