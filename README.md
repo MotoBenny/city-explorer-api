@@ -33,9 +33,9 @@ Actual time needed to complete: 30
 _____________________________________
 Name of feature: Weather (placeholder)
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1:30
 
-Start time: 
+Start time: 2:30
 
 Finish time: 
 
