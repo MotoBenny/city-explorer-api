@@ -4,7 +4,7 @@
 **Author**: Benjamin Carter
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
-## [WRRC Whiteboard](./public/Whiteboard.png)
+[WRRC lab06](./public/Whiteboard.png)
 
 [wrrc lab07](./public/lab07_8.jpg)
 
