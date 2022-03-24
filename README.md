@@ -6,7 +6,7 @@
 
 [WRRC lab06](./public/Whiteboard.png)
 
-[wrrc lab07](./public/lab07_8.jpg)
+[wrrc lab07](./public/lab07_8.jpeg)
 
 [wrrc lab08](./public/Lab07_8.jpeg)
 
