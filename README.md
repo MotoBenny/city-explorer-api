@@ -10,6 +10,8 @@
 
 [wrrc lab08](./public/Lab07_8.jpeg)
 
+[wrrc lab09](./public/Lab09.jpeg)
+
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
@@ -87,3 +89,13 @@ Start time: 6:54
 Finish time: 11:45
 
 Actual time needed to complete: 6 hours
+_____________________________________
+Name of feature: refactor/modularize.
+
+Estimate of time needed to complete: 45 minutes
+
+Start time: 1:30
+
+Finish time: 2:19
+
+Actual time needed to complete: 50 minutes
