@@ -3,35 +3,47 @@
 // const e = require('express');
 
 
-const { response } = require('express');
 // requires
-const express = require('express');
 require('dotenv').config();
-let data = require('./data/weather.json');
+const { response } = require('express');
+const express = require('express');
+const { default: axios } = require('axios');
 const cors = require('cors'); // to share data
-
 
 // use
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3002;
-
-
+const WEATHER = process.env.WEATHER_API_KEY;
+const MOVIE = process.env.MOVIE_API_KEY;
 
 // routes
-
 // Send data from weather API to client
-app.get('/weather', (req, res) => {
+// WEATHER GET CALL
+app.get('/weather', async (req, res) => {
   try {
     let city = req.query.city_name; // searchQuery
-    let cityObj = data.find(x => x.city_name === city);
-    let cityForecast = new Forecast(cityObj);
+    let forecastData = await axios.get(`https://api.weatherbit.io/v2.0/current?city=${city}&key=${WEATHER}`);
+
+    let cityForecast = new Forecast(forecastData.data);
     res.send(cityForecast); // weather data from weatherAPI
   } catch (error) {
-    response.status(500).send(error.message);
+    res.status(500).send(error.message);
   }
 });
 
+// Movie API call.
+app.get('/movies', async (req, res) => {
+  try {
+    let location = req.query.city_name;
+    let moviesArr = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIE}&language=en-US&query=${location}&include_adult=false`);
+
+    let moviesParsed = new MovieData(moviesArr.data);
+    res.send(moviesParsed);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 // invalid URL catch
 app.get('*', (req, res) => {
   res.send('This page does not exist, move along');
@@ -46,20 +58,24 @@ app.use((error, request, response, next) => {
 // classes constructor
 
 class Forecast {
-  constructor(cityObj) { // where foundCity === Seattle object than forecast = desc value
-    this.cityName = cityObj.city_name;
-    // day 1 below
-    this.forecastOne = cityObj.data[0].weather.description;
-    this.dateOne = cityObj.data[0].valid_date;
-    // day 2 below
-    this.forecastTwo = cityObj.data[1].weather.description;
-    this.dateTwo = cityObj.data[1].valid_date;
-    // day 3 below
-    this.forecastThree = cityObj.data[2].weather.description;
-    this.dateThree = cityObj.data[2].valid_date;
+  constructor(cityObj) {
+    this.cityName = cityObj.data[0].city_name;
+    this.description = cityObj.data[0].weather.description;
+    this.date = cityObj.data[0].ob_time;
+  }
+}
+
+class MovieData {
+  constructor(moviesArr) {
+    this.moviesParsed = [];
+    moviesArr.results.forEach(movie => {
+      this.moviesParsed.push({ title: movie.original_title, overview: movie.overview, vote_average: movie.vote_average, vote_count: movie.vote_count, img: movie.poster_path, popularity: movie.popularity, release_date: movie.release_date });
+    });
+
   }
 }
 
 // listen
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+
