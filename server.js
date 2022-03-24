@@ -3,32 +3,30 @@
 // const e = require('express');
 
 
-const { response } = require('express');
 // requires
-const express = require('express');
 require('dotenv').config();
-let data = require('./data/weather.json');
+const { response } = require('express');
+const express = require('express');
+const { default: axios } = require('axios');
 const cors = require('cors'); // to share data
-
 
 // use
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3002;
-
-
+const WEATHER = process.env.WEATHER_API_KEY;
 
 // routes
-
 // Send data from weather API to client
-app.get('/weather', (req, res) => {
+app.get('/weather', async (req, res) => {
   try {
     let city = req.query.city_name; // searchQuery
-    let cityObj = data.find(x => x.city_name === city);
-    let cityForecast = new Forecast(cityObj);
+    let forecastData = await axios.get(`https://api.weatherbit.io/v2.0/current?city=${city}&key=${WEATHER}`);
+
+    let cityForecast = new Forecast(forecastData.data);
     res.send(cityForecast); // weather data from weatherAPI
   } catch (error) {
-    response.status(500).send(error.message);
+    res.status(500).send(error.message);
   }
 });
 
@@ -47,16 +45,16 @@ app.use((error, request, response, next) => {
 
 class Forecast {
   constructor(cityObj) { // where foundCity === Seattle object than forecast = desc value
-    this.cityName = cityObj.city_name;
-    // day 1 below
-    this.forecastOne = cityObj.data[0].weather.description;
-    this.dateOne = cityObj.data[0].valid_date;
-    // day 2 below
-    this.forecastTwo = cityObj.data[1].weather.description;
-    this.dateTwo = cityObj.data[1].valid_date;
-    // day 3 below
-    this.forecastThree = cityObj.data[2].weather.description;
-    this.dateThree = cityObj.data[2].valid_date;
+    this.cityName = cityObj.data[0].city_name;
+    this.description = cityObj.data[0].weather.description;
+    console.log(`this. cityName is: ${this.cityName}` );
+    console.log(`this. description is: ${this.description}` );
+    // city Lat and Lon.data[0].weather
+    // this.latOne = cityObj.data.lat;
+    // this.lonOne = cityObj.data.lon;
+
+    // this.foreOne = 
+
   }
 }
 
