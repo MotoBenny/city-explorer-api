@@ -1,44 +1,37 @@
 'use strict';
-// imports
-// const e = require('express');
 
-
-// requires
 require('dotenv').config();
-const { response } = require('express');
 const express = require('express');
-const { default: axios } = require('axios');
-const cors = require('cors'); // to share data
-const getForecast = require('./forecast.js');
-const getMovies = require('./movies.js');
+const cors = require('cors');
+const getWeather = require('./modules/weather.js');
+const getMovies = require('./Modules/movies.js');
 
-// use
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3002;
 
 
+app.get('/weather', weatherHandler);
+app.get('/movies', movieHandler);
 
-// routes
-// Send data from weather API to client
-// WEATHER GET CALL
-app.get('./forecast', getForecast);
+function weatherHandler(request, response) {
+  const {city} = request.query;
+  getWeather(city)
+    .then(summaries => response.send(summaries))
+    .catch((error) => {
+      console.error(error);
+      response.status(500).send('Sorry. Something went wrong!');
+    });
+}
 
-// Movie API call.
-app.get('/movies', getMovies);
+function movieHandler(request, response) {
+  const {city} = request.query;
+  getMovies(city)
+    .then(summaries => response.send(summaries))
+    .catch((error) => {
+      console.error(error);
+      response.status(500).send('Sorry. Something went wrong!');
+    });
+}
 
-// error handling
-
-app.use((error, request, response, next) => {
-  response.status(500).send(error.message);
-});
-
-// classes 
-
-// Class for getForecast within ./forecast.js
-// Class for getMovies within ./movies.js
-
-// listen
-
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
-
+app.listen(PORT, () => console.log(`Server up on ${PORT}`));
