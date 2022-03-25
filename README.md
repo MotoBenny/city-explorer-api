@@ -12,6 +12,8 @@
 
 [wrrc lab09](./public/Lab09.jpeg)
 
+[wrrc lab10](./public/Lab10.jpeg)
+
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
@@ -99,3 +101,13 @@ Start time: 1:30
 Finish time: 2:19
 
 Actual time needed to complete: 50 minutes
+_____________________________________________
+Name of feature: Modularize server, add cache
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 1:30
+
+Finish time: 4:50
+
+Actual time needed to complete: 3 hours 20 minutes

@@ -6,7 +6,7 @@ async function getMovies(req, res) {
   try {
     let location = req.query.city_name;
     let moviesArr = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIE}&language=en-US&query=${location}&include_adult=false`);
-  
+
     let moviesParsed = new MovieData(moviesArr.data);
     res.send(moviesParsed);
   } catch (error) {
