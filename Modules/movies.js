@@ -3,7 +3,6 @@ const { default: axios } = require('axios');
 let cache = require('./cache.js');
 const MOVIE = process.env.MOVIE_API_KEY;
 
-
 function getMovies(city) {
   const key = 'movies-' + city;
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE}&query=${city}`;
@@ -16,7 +15,6 @@ function getMovies(city) {
     cache[key].data = axios.get(url)
       .then(response => parseMovie(response.data));
   }
-
   return cache[key].data;
 }
 
@@ -31,7 +29,6 @@ function parseMovie(movieData) {
     return Promise.reject(e);
   }
 }
-
 
 class Movie {
   constructor(movie) {
