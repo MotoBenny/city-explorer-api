@@ -10,8 +10,8 @@ const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3002;
 
-app.get('./Modules/weather', weatherHandler);
-app.get('./Modules/movies', movieHandler);
+app.get('/weather', weatherHandler);
+app.get('/movies', movieHandler);
 
 function weatherHandler(request, response) {
   const {city} = request.query;
