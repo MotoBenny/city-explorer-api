@@ -3,16 +3,15 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const getWeather = require('./modules/weather.js');
+const getWeather = require('./Modules/weather.js');
 const getMovies = require('./Modules/movies.js');
 
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3002;
 
-
-app.get('/weather', weatherHandler);
-app.get('/movies', movieHandler);
+app.get('./Modules/weather', weatherHandler);
+app.get('./Modules/movies', movieHandler);
 
 function weatherHandler(request, response) {
   const {city} = request.query;
